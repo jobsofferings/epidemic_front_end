@@ -1,11 +1,17 @@
 import React from 'react';
+import { ConfigProvider } from 'antd';
+import EpidemicIcon from './util/EpidemicIcon';
+
+const antdConfig = {} ;
 
 const App = () => {
+
   return (
-    <div className="App">
-      123
-    </div>
+    <ConfigProvider {...antdConfig}>
+      <EpidemicIcon type='icon-add' />
+    </ConfigProvider>
   );
+  
 }
 
 export default App;
