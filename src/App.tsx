@@ -1,17 +1,20 @@
 import React from 'react';
-import { ConfigProvider } from 'antd';
-import EpidemicIcon from './util/EpidemicIcon';
+import { ConfigProvider, Layout } from 'antd';
+import HeaderWrapper from './components/HeaderWrapper';
+import './index.less';
 
-const antdConfig = {} ;
+const antdConfig = {};
 
 const App = () => {
 
   return (
     <ConfigProvider {...antdConfig}>
-      <EpidemicIcon type='icon-add' />
+      <Layout>
+        <HeaderWrapper />
+      </Layout>
     </ConfigProvider>
   );
-  
+
 }
 
 export default App;

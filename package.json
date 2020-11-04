@@ -10,22 +10,24 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
+    "antd": "^4.8.0",
+    "babel-plugin-import": "^1.13.1",
+    "classnames": "^2.2.6",
+    "customize-cra": "^0.9.1",
+    "echarts": "^4.9.0",
+    "lodash": "^4.17.15",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
     "typescript": "^4.0.3",
-    "web-vitals": "^0.2.4",
-    "classnames": "^2.2.6",
-    "echarts": "^4.9.0",
-    "lodash": "^4.17.15",
-    "antd": "^4.8.0"
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
   },
   "eslintConfig": {
     "extends": [
@@ -46,7 +48,12 @@
     ]
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.10",
+    "@types/echarts": "^4.6.5",
+    "@types/lodash": "^4.14.151",
     "less": "^3.11.1",
-    "less-loader": "^5.0.0"
+    "less-loader": "^5.0.0",
+    "customize-cra": "^0.9.1",
+    "react-app-rewired": "^2.1.6"
   }
 }
