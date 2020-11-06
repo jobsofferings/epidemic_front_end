@@ -1,10 +1,97 @@
 import React, { useState } from "react";
 import { Layout, Menu } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import EpidemicIcon from "../util/EpidemicIcon";
+import { LinkProps } from 'react-router-dom';
+import { MenuProps } from 'antd/lib/menu/index.d';
+import { MenuItemProps } from 'antd/lib/menu/MenuItem';
+import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import { get } from 'lodash';
 
-const { SubMenu } = Menu;
+const { SubMenu, Item } = Menu;
 const { Sider } = Layout;
+
+export interface BaseMenuProps {
+  menuConfig: BaseMenuConfig[];
+  menuProps?: MenuProps;
+}
+
+export interface BaseMenuConfig {
+  path: string;
+  title: React.ReactNode;
+  linkProps?: Omit<LinkProps, 'to' | 'title'>;
+  menuItemProps?: MenuItemProps;
+  children?: BaseMenuConfig[];
+  id?: number
+  isSubMenu?: Boolean
+}
+
+const menuConfig = [
+  {
+    path: 'option 1',
+    title: 'option 1',
+    linkProps: {},
+    menuItemProps: {
+      icon: <UserOutlined />
+    },
+    children: [
+      {
+        path: 'option 11',
+        title: 'option 11',
+        linkProps: {},
+        menuItemProps: {},
+      },
+      {
+        path: 'option 12',
+        title: 'option 12',
+        linkProps: {},
+        menuItemProps: {}
+      },
+      {
+        path: 'option 13',
+        title: 'option 13',
+        linkProps: {},
+        menuItemProps: {}
+      },
+    ]
+  },
+  {
+    path: 'option 2',
+    title: 'option 2',
+    linkProps: {},
+    menuItemProps: {
+      icon: <LaptopOutlined />
+    }
+  },
+  {
+    path: 'option 3',
+    title: 'option 3',
+    linkProps: {},
+    menuItemProps: {
+      icon: <NotificationOutlined />
+    }
+  },
+]
+
+const generateMenuItem = ({
+  path,
+  title,
+  // linkProps,
+  menuItemProps,
+}: Omit<BaseMenuConfig, 'children'>) => {
+  return (
+    <Item key={path} {...menuItemProps}>
+      {/* <Link
+        {...{
+          to: path,
+          rel: 'noopener noreferrer',
+          ...linkProps,
+        }}
+      > */}
+      {title}
+      {/* </Link> */}
+    </Item>
+  );
+};
 
 const SiderWrapper = () => {
 
@@ -16,30 +103,25 @@ const SiderWrapper = () => {
   return <>
     <Sider collapsed={collapsed} className="epidemic-menu" width={200}>
       <Menu
-      className="epidemic-sider-menu"
+        className="epidemic-sider-menu"
         mode="inline"
         defaultSelectedKeys={['1']}
         defaultOpenKeys={['sub1']}
         style={{ height: '100%' }}
       >
-        <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-          <Menu.Item key="1">option1</Menu.Item>
-          <Menu.Item key="2">option2</Menu.Item>
-          <Menu.Item key="3">option3</Menu.Item>
-          <Menu.Item key="4">option4</Menu.Item>
-        </SubMenu>
-        <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-          <Menu.Item key="5">option5</Menu.Item>
-          <Menu.Item key="6">option6</Menu.Item>
-          <Menu.Item key="7">option7</Menu.Item>
-          <Menu.Item key="8">option8</Menu.Item>
-        </SubMenu>
-        <SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
-          <Menu.Item key="9">option9</Menu.Item>
-          <Menu.Item key="10">option10</Menu.Item>
-          <Menu.Item key="11">option11</Menu.Item>
-          <Menu.Item key="12">option12</Menu.Item>
-        </SubMenu>
+        {menuConfig.map(({ children, ...otherProps }) =>
+          !children ? (
+            generateMenuItem(otherProps)
+          ) : (
+              <SubMenu
+                key={otherProps.path}
+                title={otherProps.title}
+                icon={get(otherProps, 'menuItemProps.icon')}
+              >
+                {children.map((v) => generateMenuItem(v))}
+              </SubMenu>
+            ),
+        )}
       </Menu>
     </Sider>
     <div className='epidemic-triggle'>
