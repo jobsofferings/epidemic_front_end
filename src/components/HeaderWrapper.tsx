@@ -1,14 +1,12 @@
-import React from "react";
-import { Layout, Row } from 'antd';
+import React from 'react';
+import { Layout } from 'antd';
 
-const HeaderWrapper: React.FunctionComponent = (props) => {
+const { Header } = Layout;
 
-  return <Layout.Header {...props}>
-    <Row justify="space-between" align="middle" className="open-header-main">
-1
-    </Row>
-  </Layout.Header>;
-
+const HeaderWrapper = () => {
+  return <Header className="header">
+    数据分析
+  </Header>
 }
 
 export default HeaderWrapper;
