@@ -1,26 +1,32 @@
 import React from 'react';
-import { ConfigProvider, Layout } from 'antd';
-import SiderWrapper from './components/SiderWrapper';
-import HeaderWrapper from './components/HeaderWrapper';
-import ContentWrapper from './components/ContentWrapper';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import { ConfigProvider } from 'antd';
+import EpidemicLayout from './components/EpidemicLayout';
+import { ROUTE_CONFIG } from './config/routerConfig';
 import './index.less';
 import './reset.less';
 
-const wrapperArea = { display: 'flex', flex: '0 0 92px', transition: 'all 0.2s' };
+export interface EpidemicAppProps { }
 
-const App = () => {
+const GlobalEventContext = React.createContext({});
+
+const App: React.FunctionComponent<EpidemicAppProps> = (props) => {
 
   return (
     <ConfigProvider>
-      <Layout>
-        <HeaderWrapper />
-        <Layout>
-          <div style={wrapperArea}>
-            <SiderWrapper />
-          </div>
-          < ContentWrapper />
-        </Layout>
-      </Layout>
+      <GlobalEventContext.Provider value={props}>
+        <EpidemicLayout>
+          <BrowserRouter>
+            <Switch>
+              {ROUTE_CONFIG.map(({ components, ...props }, index) =>
+                <Route key={`${props.path}${index}`} {...props}>
+                  {components}
+                </Route>
+              )}
+            </Switch>
+          </BrowserRouter>
+        </EpidemicLayout>
+      </GlobalEventContext.Provider>
     </ConfigProvider>
   );
 
