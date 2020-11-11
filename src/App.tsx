@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import EpidemicLayout from './components/EpidemicLayout';
+import antdConfig from './config/antdConfig';
 import { ROUTE_CONFIG } from './config/routerConfig';
 import './index.less';
 import './reset.less';
@@ -13,7 +14,7 @@ const GlobalEventContext = React.createContext({});
 const App: React.FunctionComponent<EpidemicAppProps> = (props) => {
 
   return (
-    <ConfigProvider>
+    <ConfigProvider {...antdConfig}>
       <GlobalEventContext.Provider value={props}>
         <EpidemicLayout>
           <BrowserRouter>
