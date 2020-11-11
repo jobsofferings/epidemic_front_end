@@ -1,29 +1,6 @@
-import React, { useState } from "react";
-import { Layout, Menu } from 'antd';
-import EpidemicIcon from "../util/EpidemicIcon";
-import { LinkProps } from 'react-router-dom';
-import { MenuProps } from 'antd/lib/menu/index.d';
-import { MenuItemProps } from 'antd/lib/menu/MenuItem';
+import React from "react";
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-import { get } from 'lodash';
-
-const { SubMenu, Item } = Menu;
-const { Sider } = Layout;
-
-export interface BaseMenuProps {
-  menuConfig: BaseMenuConfig[];
-  menuProps?: MenuProps;
-}
-
-export interface BaseMenuConfig {
-  path: string;
-  title: React.ReactNode;
-  linkProps?: Omit<LinkProps, 'to' | 'title'>;
-  menuItemProps?: MenuItemProps;
-  children?: BaseMenuConfig[];
-  id?: number
-  isSubMenu?: Boolean
-}
+import EpidemicSider from "./EpidemicSider";
 
 const menuConfig = [
   {
@@ -72,63 +49,14 @@ const menuConfig = [
   },
 ]
 
-const generateMenuItem = ({
-  path,
-  title,
-  // linkProps,
-  menuItemProps,
-}: Omit<BaseMenuConfig, 'children'>) => {
-  return (
-    <Item key={path} {...menuItemProps}>
-      {/* <Link
-        {...{
-          to: path,
-          rel: 'noopener noreferrer',
-          ...linkProps,
-        }}
-      > */}
-      {title}
-      {/* </Link> */}
-    </Item>
-  );
-};
-
 const SiderWrapper = () => {
 
-
-  const [collapsed, setCollapsed] = useState(false);
-
-  const toggleCollapse = () => setCollapsed(!collapsed);
-
-  return <>
-    <Sider collapsed={collapsed} className="epidemic-menu" width={200}>
-      <Menu
-        className="epidemic-sider-menu"
-        mode="inline"
-        defaultSelectedKeys={['1']}
-        defaultOpenKeys={['sub1']}
-        style={{ height: '100%' }}
-      >
-        {menuConfig.map(({ children, ...otherProps }) =>
-          !children ? (
-            generateMenuItem(otherProps)
-          ) : (
-              <SubMenu
-                key={otherProps.path}
-                title={otherProps.title}
-                icon={get(otherProps, 'menuItemProps.icon')}
-              >
-                {children.map((v) => generateMenuItem(v))}
-              </SubMenu>
-            ),
-        )}
-      </Menu>
-    </Sider>
-    <div className='epidemic-triggle'>
-      <EpidemicIcon type={collapsed ? 'icon-draw-right' : 'icon-draw-left'} onClick={toggleCollapse} />
-    </div>
-  </>;
-  ;
+  return <EpidemicSider 
+    {...{
+      menuConfig,
+      menuProps: { defaultOpenKeys: [], className: 'epidemic-sider-menu' },
+    }}
+  />
 }
 
 export default SiderWrapper;
