@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import EpidemicLayout from './components/EpidemicLayout';
 import antdConfig from './config/antdConfig';
-import { ROUTE_CONFIG } from './config/routerConfig';
+import { ROUTE_CONFIG } from './config/router';
 import './index.less';
 import './reset.less';
 

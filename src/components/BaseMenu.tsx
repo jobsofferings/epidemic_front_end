@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { Menu } from 'antd';
 import { LinkProps, Link } from 'react-router-dom';
 import { MenuProps } from 'antd/lib/menu/index.d';
@@ -22,6 +22,8 @@ export interface BaseMenuConfig {
   isSubMenu?: Boolean
 }
 
+const noSelectedStyle: CSSProperties = { userSelect: 'none' };
+
 const defaultBaseMenuProps: any = {
   className: "epidemic-sider-menu",
   mode: "inline",
@@ -42,6 +44,7 @@ const generateMenuItem = ({
         {...{
           to: path,
           rel: 'noopener noreferrer',
+          style: noSelectedStyle,
           ...linkProps,
         }}
       >
@@ -61,6 +64,7 @@ const BaseMenu: React.FunctionComponent<BaseMenuProps> = ({ menuConfig, menuProp
             <SubMenu
               key={otherProps.path}
               title={otherProps.title}
+              style={noSelectedStyle}
               icon={get(otherProps, 'menuItemProps.icon')}
             >
               {children.map((v) => generateMenuItem(v))}
