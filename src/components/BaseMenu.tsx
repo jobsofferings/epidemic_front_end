@@ -1,10 +1,11 @@
 import React from 'react';
 import { Menu } from 'antd';
-import {  LinkProps } from 'react-router-dom';
-
+import { LinkProps, Link } from 'react-router-dom';
 import { MenuProps } from 'antd/lib/menu/index.d';
 import { MenuItemProps } from 'antd/lib/menu/MenuItem';
 import { get } from 'lodash';
+
+const { SubMenu, Item } = Menu;
 
 export interface BaseMenuProps {
   menuConfig: BaseMenuConfig[];
@@ -21,39 +22,38 @@ export interface BaseMenuConfig {
   isSubMenu?: Boolean
 }
 
-const { SubMenu, Item } = Menu;
+const defaultBaseMenuProps: any = {
+  className: "epidemic-sider-menu",
+  mode: "inline",
+  defaultSelectedKeys: ['1'],
+  defaultOpenKeys: ['sub1'],
+  style: { height: '100%' }
+}
 
 const generateMenuItem = ({
   path,
   title,
-  // linkProps,
+  linkProps,
   menuItemProps,
 }: Omit<BaseMenuConfig, 'children'>) => {
   return (
     <Item key={path} {...menuItemProps}>
-      {/* <Link
+      <Link
         {...{
           to: path,
           rel: 'noopener noreferrer',
           ...linkProps,
         }}
-      > */}
-      {title}
-      {/* </Link> */}
+      >
+        {title}
+      </Link>
     </Item>
   );
 };
 
 const BaseMenu: React.FunctionComponent<BaseMenuProps> = ({ menuConfig, menuProps }) => {
   return (
-    <Menu
-      className="epidemic-sider-menu"
-      mode="inline"
-      defaultSelectedKeys={['1']}
-      defaultOpenKeys={['sub1']}
-      style={{ height: '100%' }}
-      {...menuProps}
-    >
+    <Menu {...{ ...defaultBaseMenuProps, ...menuProps }}>
       {menuConfig.map(({ children, ...otherProps }) =>
         !children ? (
           generateMenuItem(otherProps)

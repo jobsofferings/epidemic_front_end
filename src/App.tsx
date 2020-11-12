@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import EpidemicLayout from './components/EpidemicLayout';
 import antdConfig from './config/antdConfig';
@@ -17,7 +17,6 @@ const App: React.FunctionComponent<EpidemicAppProps> = (props) => {
     <ConfigProvider {...antdConfig}>
       <GlobalEventContext.Provider value={props}>
         <EpidemicLayout>
-          <BrowserRouter>
             <Switch>
               {ROUTE_CONFIG.map(({ components, ...props }, index) =>
                 <Route key={`${props.path}${index}`} {...props}>
@@ -25,7 +24,6 @@ const App: React.FunctionComponent<EpidemicAppProps> = (props) => {
                 </Route>
               )}
             </Switch>
-          </BrowserRouter>
         </EpidemicLayout>
       </GlobalEventContext.Provider>
     </ConfigProvider>

@@ -7,15 +7,23 @@ export interface RouteConfigProps {
 }
 
 export const ROUTE_CONFIG: RouteConfigProps[] = [{
-  path: '/ability',
-  exact: true,
-  components: <div>123456</div>
-}, {
   path: '/ability/a',
   exact: true,
   components: <div>123456aaaaaaaa</div>
 }, {
   path: '/ability/b',
   exact: true,
-  components: <div>123456bbbbbbbb</div>
+  components: <div>123456bbbbbbbbbbbbbbbb</div>
+}, {
+  path: '/ability/c',
+  exact: true,
+  components: <div>123456cccccccccccccccccccccccc</div>
+}, {
+  path: '/earth',
+  exact: true,
+  components: <div>earth</div>
+}, {
+  path: '/city',
+  exact: true,
+  components: <div>city</div>
 },];
