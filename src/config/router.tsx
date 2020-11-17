@@ -1,5 +1,6 @@
 import React from "react";
 import MockEchart from "../page/MockEchart";
+import DevicesMapThird from "../page/DevicesMapThird";
 
 export interface RouteConfigProps {
   path: string;
@@ -14,7 +15,7 @@ export const ROUTE_CONFIG: RouteConfigProps[] = [{
 }, {
   path: '/ability/b',
   exact: true,
-  components: <div>123456bbbbbbbbbbbbbbbb</div>
+  components: <DevicesMapThird />
 }, {
   path: '/ability/c',
   exact: true,
