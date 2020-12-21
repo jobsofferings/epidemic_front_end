@@ -14,14 +14,6 @@ export const TABLE_PAGINATION: Partial<TablePaginationConfig> = {
   position: ['bottomLeft'],
 };
 
-/** * 对Date的扩展，将 Date 转化为指定格式的String * 月(M)、日(d)、12小时(h)、24小时(H)、分(m)、秒(s)、周(E)、季度(q)
-  可以用 1-2 个占位符 * 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) * eg: * (new
-  Date()).pattern("yyyy-MM-dd hh:mm:ss.S")==> 2006-07-02 08:09:04.423
-* this.dateFormat(new Date(), "yyyy-MM-dd E HH:mm:ss") ==> 2017-03-29 二 20:09:04
-* this.dateFormat(new Date(), "yyyy-MM-dd EE hh:mm:ss") ==> 2009-03-10 周二 08:09:04
-* this.dateFormat(new Date(), "yyyy-MM-dd EEE hh:mm:ss") ==> 2009-03-10 星期二 08:09:04
-* this.dateFormat(new Date(), "yyyy-M-d h:m:s.S") ==> 2006-7-2 8:9:4.18
-*/
 export function dateFormat(date: Date, fmt: string) {
   let o: any = {
     'M+': date.getMonth() + 1, // 月份

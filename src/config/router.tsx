@@ -8,24 +8,31 @@ export interface RouteConfigProps {
   components: JSX.Element | null;
 }
 
+export const PATH_ROOT = '/data';
+export const PATH_DOMESTIC = '/data/domestic';
+export const PATH_FOREIGN = '/data/foreign';
+export const PATH_COMPARED = '/data/compared';
+export const PATH_NEWS = '/news';
+export const PATH_PREVENTION = '/prevention';
+
 export const ROUTE_CONFIG: RouteConfigProps[] = [{
-  path: '/ability/a',
+  path: PATH_DOMESTIC,
   exact: true,
   components: <MockEchart />
 }, {
-  path: '/ability/b',
+  path: PATH_FOREIGN,
   exact: true,
   components: <DevicesMapThird />
 }, {
-  path: '/ability/c',
+  path: PATH_COMPARED,
   exact: true,
-  components: <div>123456cccccccccccccccccccccccc</div>
+  components: <div>compared</div>
 }, {
-  path: '/earth',
+  path: PATH_NEWS,
   exact: true,
-  components: <div>earth</div>
+  components: <div>news</div>
 }, {
-  path: '/city',
+  path: PATH_PREVENTION,
   exact: true,
-  components: <div>city</div>
-},];
+  components: <div>prevention</div>
+}];

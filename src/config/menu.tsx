@@ -1,46 +1,47 @@
 import React from 'react';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import { PATH_ROOT, PATH_DOMESTIC, PATH_FOREIGN, PATH_COMPARED, PATH_NEWS, PATH_PREVENTION } from './router';
 
 export const menuConfig = [
   {
-    path: '/ability',
-    title: 'option 1',
+    path: PATH_ROOT,
+    title: '疫情数据',
     linkProps: {},
     menuItemProps: {
       icon: <UserOutlined />
     },
     children: [
       {
-        path: '/ability/a',
-        title: 'option 11',
+        path: PATH_DOMESTIC,
+        title: '国内疫情状况',
         linkProps: {},
         menuItemProps: {},
       },
       {
-        path: '/ability/b',
-        title: 'option 12',
+        path: PATH_FOREIGN,
+        title: '国外疫情状况',
         linkProps: {},
         menuItemProps: {}
       },
       {
-        path: '/ability/c',
-        title: 'option 13',
+        path: PATH_COMPARED,
+        title: '国内外对比',
         linkProps: {},
         menuItemProps: {}
       },
     ]
   },
   {
-    path: '/earth',
-    title: 'option 2',
+    path: PATH_NEWS,
+    title: '疫情新闻',
     linkProps: {},
     menuItemProps: {
       icon: <LaptopOutlined />
     }
   },
   {
-    path: '/city',
-    title: 'option 3',
+    path: PATH_PREVENTION,
+    title: '预防小贴士',
     linkProps: {},
     menuItemProps: {
       icon: <NotificationOutlined />
@@ -48,4 +49,4 @@ export const menuConfig = [
   },
 ]
 
-export const DEFAULT_OPEN_KEY = ['/ability'];
+export const DEFAULT_OPEN_KEY = [PATH_ROOT];
