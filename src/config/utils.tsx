@@ -54,3 +54,12 @@ export function dateFormat(date: Date, fmt: string) {
   }
   return fmt;
 }
+
+export const getPersistData = (key: string, needParse = false) => {
+  try {
+    const data = window.localStorage.getItem(key) || ''
+    return needParse ? JSON.parse(data) : data
+  } catch (error) {
+    return null
+  }
+}
