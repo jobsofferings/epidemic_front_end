@@ -1,12 +1,18 @@
-import React from 'react';
-import { Layout } from 'antd';
+import React from 'react'
+import { Col, Layout, Row } from 'antd'
 
-const { Header } = Layout;
+const { Header } = Layout
+
+const hoverStyle: React.CSSProperties = { cursor: 'pointer' }
 
 const HeaderWrapper = () => {
-  return <Header className="epidemic-header">
-    数据分析
-  </Header>
+  return (
+    <Header className="epidemic-header">
+      <Row>
+        <Col style={hoverStyle}>数据分析</Col>
+      </Row>
+    </Header>
+  )
 }
 
-export default HeaderWrapper;
+export default HeaderWrapper
