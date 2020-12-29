@@ -1,6 +1,6 @@
 import React from 'react'
-import { GET_FOREIGN } from '../../gql/foreign'
-import useBaseQuery from '../../hooks/useBaseQuery'
+import { GET_FOREIGN } from 'src/gql/inews'
+import useBaseQuery from 'src/hooks/useBaseQuery'
 
 const Foreign = () => {
   const {

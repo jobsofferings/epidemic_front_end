@@ -1,8 +1,8 @@
 import React from 'react'
-import MockEchart from '../page/MockEchart'
-import DevicesMapThird from '../page/DevicesMapThird'
-import Foreign from '../page/Foreign'
-import Home from '../page/Home'
+import DevicesMapThird from 'src/page/DevicesMapThird'
+import Foreign from 'src/page/Foreign'
+import Home from 'src/page/Home'
+import MockEchart from 'src/page/MockEchart'
 
 export interface RouteConfigProps {
   path: string

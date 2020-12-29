@@ -1,7 +1,7 @@
-import { QueryHookOptions, useLazyQuery, QueryTuple } from '@apollo/react-hooks';
-import { DocumentNode } from 'graphql';
-import { LAZY_QUERY_OPTIONS, getQueryResult } from '../config/components';
-import { OperationVariables } from 'apollo-client';
+import { QueryHookOptions, useLazyQuery, QueryTuple } from '@apollo/react-hooks'
+import { DocumentNode } from 'graphql'
+import { LAZY_QUERY_OPTIONS, getQueryResult } from 'src/config/components'
+import { OperationVariables } from 'apollo-client'
 
 export interface BaseLazyQueryProps extends Omit<QueryHookOptions, 'query'> {
   query: DocumentNode

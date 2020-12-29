@@ -4,9 +4,9 @@ import { DocumentNode } from 'graphql'
 import { TableProps } from 'antd/es/table'
 import { PaginationProps } from 'antd/lib/pagination'
 import { get } from 'lodash'
+import useBaseLazyQuery from 'src/hooks/useBaseLazyQuery'
+import { PAGE_LIMIT } from 'src/config/utils'
 import BaseTable from '../BaseTable'
-import { PAGE_LIMIT } from '../../config/utils'
-import useBaseLazyQuery from '../../hooks/useBaseLazyQuery'
 
 export interface DataTableProps
   extends TableProps<any>,

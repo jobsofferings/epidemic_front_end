@@ -35,3 +35,19 @@ export const GET_FOREIGN = gql`
     }
   }
 `
+
+export const GET_COUNTRY_CONFIRM_ADD = gql`
+  query getCountryConfirmAdd {
+    getCountryConfirmAdd {
+      data
+    }
+  }
+`
+
+export const GET_CHINA_DAY_LIST = gql`
+  query getChinaDayList {
+    getChinaDayList {
+      list
+    }
+  }
+`

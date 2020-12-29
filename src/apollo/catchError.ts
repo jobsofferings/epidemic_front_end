@@ -1,7 +1,7 @@
 import { ApolloLink, Observable } from 'apollo-link'
 import { ApolloError } from 'apollo-client'
 import { isPlainObject } from 'lodash'
-import { getQueryResult } from '../config/components'
+import { getQueryResult } from 'src/config/components'
 import notifyMsg, { getApolloErrorMsg } from './ErrorHandler'
 
 export function catchError(): ApolloLink {

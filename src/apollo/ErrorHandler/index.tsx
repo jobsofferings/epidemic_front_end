@@ -1,10 +1,10 @@
 import React from 'react'
 import { notification } from 'antd'
+import { get } from 'lodash'
 import { ApolloError, isApolloError } from 'apollo-client'
 import { NotificationInstance, ArgsProps } from 'antd/lib/notification'
-import { get } from 'lodash'
 import { GraphQLError, ExecutionResult } from 'graphql'
-import EpidemicIcon from '../../util/EpidemicIcon'
+import EpidemicIcon from 'src/util/EpidemicIcon'
 import './index.less'
 
 export type NotifyFunc<T> = (msg: Error | string) => T
@@ -31,11 +31,7 @@ notification.config({
   duration: 3,
 })
 
-const AUTH_CODES = [
-  '74017',
-  '74007',
-  'UNAUTHENTICATED'
-]
+const AUTH_CODES = ['74017', '74007', 'UNAUTHENTICATED']
 const isUnauthError = (e: GraphQLError) =>
   AUTH_CODES.find((code) => code === get(e, 'extensions.code'))
 

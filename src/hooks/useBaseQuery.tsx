@@ -1,6 +1,6 @@
 import { QueryHookOptions, useQuery } from '@apollo/react-hooks'
 import { DocumentNode } from 'graphql'
-import { QUERY_OPTIONS, getQueryResult } from '../config/components'
+import { QUERY_OPTIONS, getQueryResult } from 'src/config/components'
 
 export interface BaseQueryProps extends Omit<QueryHookOptions, 'query'> {
   query: DocumentNode
