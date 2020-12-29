@@ -7,16 +7,15 @@ import { get } from 'lodash'
 import BaseTable from '../BaseTable'
 import { PAGE_LIMIT } from '../../config/utils'
 import useBaseLazyQuery from '../../hooks/useBaseLazyQuery'
-import { OPUtils } from '../../typings/utils'
 
 export interface DataTableProps
   extends TableProps<any>,
     Omit<QueryHookOptions, 'query'> {
   query: DocumentNode
-  createPath?: (record: Record<string, any>) => string
+  createPath?: (record: OPUtils.Record<string, any>) => string
   getResult?: (nodes: any[], total: number) => void
   queryOptions?: Omit<QueryHookOptions, 'variables'>
-  variables?: Record<string, any>
+  variables?: OPUtils.Record<string, any>
   refetchSignal?: any
   needPagination?: boolean
   localPagination?: boolean

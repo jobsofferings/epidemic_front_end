@@ -1,5 +1,3 @@
-import { SelectProps } from 'antd/lib/select'
-
 declare namespace OPUtils {
   type Maybe<T> = null | undefined | T
 

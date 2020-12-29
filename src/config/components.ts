@@ -1,7 +1,6 @@
 import { QueryHookOptions } from '@apollo/react-hooks'
 import { QueryResult } from 'react-apollo'
 import { isPlainObject } from 'lodash'
-import { OPUtils } from '../typings/utils'
 
 export const QUERY_OPTIONS: QueryHookOptions = {
   fetchPolicy: 'network-only',
