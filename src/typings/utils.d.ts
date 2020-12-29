@@ -6,4 +6,8 @@ declare namespace OPUtils {
   type Record<K extends string | number | symbol = any, T = any> = {
     [P in K]: T
   }
+
+  type Nullable<T> = {
+    [P in keyof T]?: T[P]
+  }
 }
