@@ -28,7 +28,7 @@ const columns: ColumnProps<any>[] = [
     dataIndex: 'heal',
   },
   {
-    title: '现存确',
+    title: '现存确诊',
     dataIndex: 'nowConfirm',
   },
   {
@@ -39,7 +39,7 @@ const columns: ColumnProps<any>[] = [
 
 const subColumns: ColumnProps<any>[] = [
   {
-    title: `Top${SUB_TABLE_LIMIT}地区`,
+    title: '地区',
     dataIndex: 'name',
   },
   {
@@ -55,7 +55,7 @@ const subColumns: ColumnProps<any>[] = [
     dataIndex: 'heal',
   },
   {
-    title: '现存确',
+    title: '现存确诊',
     dataIndex: 'nowConfirm',
   },
   {
@@ -66,37 +66,40 @@ const subColumns: ColumnProps<any>[] = [
 
 const Foreign = () => {
   const {
-    data: { list = [] },
+    data: { list },
   } = useBaseQuery({
     query: GET_FOREIGN,
     variables: {},
   })
+
   console.log(list)
 
   return (
     <div className="foreign-area">
       <BaseTable
         columns={columns}
-        dataSource={list}
+        dataSource={list || []}
         expandable={{
-          expandedRowRender: ({ children = [] }) => (
-            <div>
-              <BaseTable
-                style={subTableStyle}
-                columns={subColumns}
-                dataSource={children.splice(0, SUB_TABLE_LIMIT)}
-                pagination={{
-                  total: SUB_TABLE_LIMIT,
-                  pageSize: SUB_TABLE_LIMIT,
-                }}
-                rowKey="name"
-              />
-            </div>
-          ),
+          childrenColumnName: 'notChildren',
+          expandedRowRender: ({ children }) => {
+            const dataSource = (children || []).slice(0, SUB_TABLE_LIMIT)
+            return (
+              <div>
+                <div className="title">Top{SUB_TABLE_LIMIT} 国内地区</div>
+                <BaseTable
+                  style={subTableStyle}
+                  columns={subColumns}
+                  dataSource={dataSource}
+                  pagination={false}
+                  rowKey="name"
+                />
+              </div>
+            )
+          },
           rowExpandable: ({ children }) => children && children.length,
         }}
         pagination={{
-          total: list.length,
+          total: (list || []).length,
           pageSize: PAGE_LIMIT,
         }}
         rowKey="name"
