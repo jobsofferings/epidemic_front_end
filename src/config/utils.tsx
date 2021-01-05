@@ -1,18 +1,17 @@
-import { TablePaginationConfig } from 'antd/lib/table';
-import { PaginationProps } from 'antd/lib/pagination';
-
-export const PAGE_LIMIT = 10;
+import { TablePaginationConfig } from 'antd/lib/table'
+import { PaginationProps } from 'antd/lib/pagination'
+import { PAGE_LIMIT } from './constants'
 
 export const PAGINATION: Partial<PaginationProps> = {
   pageSize: PAGE_LIMIT,
   showSizeChanger: false,
   hideOnSinglePage: true,
-};
+}
 
 export const TABLE_PAGINATION: Partial<TablePaginationConfig> = {
   ...PAGINATION,
   position: ['bottomLeft'],
-};
+}
 
 export function dateFormat(date: Date, fmt: string) {
   let o: any = {
@@ -24,7 +23,7 @@ export function dateFormat(date: Date, fmt: string) {
     's+': date.getSeconds(), // 秒
     'q+': Math.floor((date.getMonth() + 3) / 3), // 季度
     S: date.getMilliseconds(), // 毫秒
-  };
+  }
   let week: any = {
     '0': '/u65e5',
     '1': '/u4e00',
@@ -33,26 +32,34 @@ export function dateFormat(date: Date, fmt: string) {
     '4': '/u56db',
     '5': '/u4e94',
     '6': '/u516d',
-  };
+  }
   if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
+    fmt = fmt.replace(
+      RegExp.$1,
+      (date.getFullYear() + '').substr(4 - RegExp.$1.length),
+    )
   }
   if (/(E+)/.test(fmt)) {
     fmt = fmt.replace(
       RegExp.$1,
-      (RegExp.$1.length > 1 ? (RegExp.$1.length > 2 ? '/u661f/u671f' : '/u5468') : '') +
-      week[date.getDay() + ''],
-    );
+      (RegExp.$1.length > 1
+        ? RegExp.$1.length > 2
+          ? '/u661f/u671f'
+          : '/u5468'
+        : '') + week[date.getDay() + ''],
+    )
   }
   for (let k in o) {
     if (new RegExp('(' + k + ')').test(fmt)) {
       fmt = fmt.replace(
         RegExp.$1,
-        RegExp.$1.length === 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length),
-      );
+        RegExp.$1.length === 1
+          ? o[k]
+          : ('00' + o[k]).substr(('' + o[k]).length),
+      )
     }
   }
-  return fmt;
+  return fmt
 }
 
 export const getPersistData = (key: string, needParse = false) => {

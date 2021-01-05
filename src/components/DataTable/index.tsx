@@ -5,8 +5,8 @@ import { TableProps } from 'antd/es/table'
 import { PaginationProps } from 'antd/lib/pagination'
 import { get } from 'lodash'
 import useBaseLazyQuery from 'src/hooks/useBaseLazyQuery'
-import { PAGE_LIMIT } from 'src/config/utils'
 import BaseTable from '../BaseTable'
+import { PAGE_LIMIT } from 'src/config/constants'
 
 export interface DataTableProps
   extends TableProps<any>,
