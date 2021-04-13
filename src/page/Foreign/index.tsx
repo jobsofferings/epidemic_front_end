@@ -1,10 +1,7 @@
 import { Row } from 'antd'
-import { ColumnProps } from 'antd/lib/table'
+import Table, { ColumnProps } from 'antd/lib/table'
 import React, { useEffect, useState } from 'react'
-import BaseTable from 'src/components/BaseTable'
 import { PAGE_LIMIT } from 'src/config/constants'
-import { GET_FOREIGN } from 'src/gql/inews'
-import useBaseQuery from 'src/hooks/useBaseQuery'
 import DimensionRadio from './DimensionRadio'
 import './index.less'
 
@@ -88,17 +85,11 @@ const Foreign = () => {
   const [continentList, setContinentList] = useState([])
   const [radiovalue, setRadioValue] = useState(0)
 
-  const {
-    data: { list },
-  } = useBaseQuery({
-    query: GET_FOREIGN,
-    variables: {},
-  })
+  const list: any[] = []
 
   useEffect(() => {
     setContinentList([])
-  }, [list])
-  console.log(list)
+  }, [])
 
   return (
     <div className="foreign-area">
@@ -108,7 +99,7 @@ const Foreign = () => {
           onChange={({ target: { value } }) => setRadioValue(value)}
         />
       </Row>
-      <BaseTable
+      <Table
         columns={columns}
         dataSource={(radiovalue ? continentList : list) || []}
         expandable={{
@@ -118,7 +109,7 @@ const Foreign = () => {
             return (
               <>
                 <div className="sub-title">Top{SUB_TABLE_LIMIT} 地区</div>
-                <BaseTable
+                <Table
                   style={subTableStyle}
                   columns={subColumns}
                   dataSource={dataSource}

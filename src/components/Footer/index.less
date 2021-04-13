@@ -1,0 +1,21 @@
+@footerHeight: 60px;
+@allWidth: 1100px;
+@allOpacity: 0.9;
+@allBackgroundColor: white;
+.footer {
+  width: 100%;
+  height: @footerHeight;
+  background-color: @allBackgroundColor;
+  box-shadow: 0 0 14px 2px #efefef;
+  opacity: @allOpacity;
+  .footerArea {
+    margin: auto;
+    width: @allWidth;
+    overflow: hidden;
+    p {
+      text-align: center;
+      font-size: 14px;
+      line-height: @footerHeight;
+    }
+  }
+}

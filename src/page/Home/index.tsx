@@ -1,8 +1,11 @@
 import React from 'react'
 import ReactEchartsCore from 'echarts-for-react/lib/core'
-import { GET_CHINA_DAY_LIST } from 'src/gql/inews'
-import useBaseQuery from 'src/hooks/useBaseQuery'
 import echarts from 'echarts'
+import BaseContent from 'src/components/BaseContent'
+import useBaseQuery from 'src/components/useBaseQuery'
+import { getChinaDayList } from 'src/fetch'
+import { Spin } from 'antd'
+import './index.less'
 
 interface ChinaDayListItemProps {
   confirm: number
@@ -52,20 +55,22 @@ const getAreaStyle = (firstColor: string, secondColor: string) => ({
 })
 
 const Home = () => {
-  const {
-    data: { list },
-  } = useBaseQuery({
-    query: GET_CHINA_DAY_LIST,
-    variables: {},
+  const { data, loading } = useBaseQuery({
+    query: [{}],
+    queryFunction: getChinaDayList,
   })
 
   return (
-    <ReactEchartsCore
-      echarts={echarts}
-      option={options(list || [])}
-      className="echarts-for-echarts"
-      style={defaultEchartStyle}
-    />
+    <div className="content-area">
+      <Spin spinning={loading}>
+        <ReactEchartsCore
+          echarts={echarts}
+          option={options(Array.isArray(data) ? data : [])}
+          className="echarts-for-echarts"
+          style={defaultEchartStyle}
+        />
+      </Spin>
+    </div>
   )
 }
 
@@ -82,6 +87,7 @@ const options = (list: ChinaDayListItemProps[]) => ({
     itemGap: 20,
   },
   xAxis: {
+    name: '日期',
     type: 'category',
     data: list.map(({ date }) => date),
     axisLabel: {
@@ -108,4 +114,4 @@ const options = (list: ChinaDayListItemProps[]) => ({
   ],
 })
 
-export default Home
+export default BaseContent(Home)

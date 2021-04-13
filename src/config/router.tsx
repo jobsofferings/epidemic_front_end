@@ -10,7 +10,7 @@ export interface RouteConfigProps {
   components: JSX.Element | null
 }
 
-export const PATH_ROOT = '/data'
+export const PATH_ROOT = '/'
 export const PATH_DOMESTIC = '/data/domestic'
 export const PATH_FOREIGN = '/data/foreign'
 export const PATH_COMPARED = '/data/compared'

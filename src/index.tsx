@@ -1,14 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import reportWebVitals from './reportWebVitals'
+import Router from './router'
+import './reset.less'
+
+const queryClient = new QueryClient()
 
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router> ,
-  document.getElementById('root')
-);
+  <QueryClientProvider client={queryClient}>
+    <Router />
+  </QueryClientProvider>,
+  document.getElementById('root'),
+)
 
-reportWebVitals();
+reportWebVitals()
