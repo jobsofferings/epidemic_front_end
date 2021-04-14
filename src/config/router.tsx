@@ -1,21 +1,20 @@
 import React from 'react'
-import DevicesMapThird from 'src/page/DevicesMapThird'
+import {
+  PATH_ROOT,
+  PATH_FOREIGN,
+  PATH_NEWS,
+  PATH_PREVENTION,
+} from 'src/components/Header'
 import Foreign from 'src/page/Foreign'
 import Home from 'src/page/Home'
-import MockEchart from 'src/page/MockEchart'
+import News from 'src/page/News'
+import Prevention from 'src/page/Prevention'
 
 export interface RouteConfigProps {
   path: string
   exact: boolean
   components: JSX.Element | null
 }
-
-export const PATH_ROOT = '/'
-export const PATH_DOMESTIC = '/data/domestic'
-export const PATH_FOREIGN = '/data/foreign'
-export const PATH_COMPARED = '/data/compared'
-export const PATH_NEWS = '/news'
-export const PATH_PREVENTION = '/prevention'
 
 export const ROUTE_CONFIG: RouteConfigProps[] = [
   {
@@ -24,28 +23,18 @@ export const ROUTE_CONFIG: RouteConfigProps[] = [
     components: <Home />,
   },
   {
-    path: PATH_DOMESTIC,
-    exact: true,
-    components: <MockEchart />,
-  },
-  {
     path: PATH_FOREIGN,
     exact: true,
     components: <Foreign />,
   },
   {
-    path: PATH_COMPARED,
-    exact: true,
-    components: <DevicesMapThird />,
-  },
-  {
     path: PATH_NEWS,
     exact: true,
-    components: <div>news</div>,
+    components: <News />,
   },
   {
     path: PATH_PREVENTION,
     exact: true,
-    components: <div>prevention</div>,
+    components: <Prevention />,
   },
 ]

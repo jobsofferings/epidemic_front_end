@@ -2,8 +2,8 @@ import React from 'react'
 import BaseContent from 'src/components/BaseContent'
 import './index.less'
 
-const Foreign = () => {
+const News = () => {
   return <div />
 }
 
-export default BaseContent(Foreign)
+export default BaseContent(News)

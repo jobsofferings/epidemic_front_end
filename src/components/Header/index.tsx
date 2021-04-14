@@ -3,22 +3,27 @@ import { Link, withRouter } from 'react-router-dom'
 import { LOGO, CLOSE, SEARCH } from 'src/svg'
 import './index.less'
 
+export const PATH_ROOT = '/'
+export const PATH_FOREIGN = '/foreign'
+export const PATH_NEWS = '/news'
+export const PATH_PREVENTION = '/prevention'
+
 const navList = [
   {
     title: '国内疫情',
-    href: '/',
+    href: PATH_ROOT,
   },
   {
     title: '国外疫情',
-    href: '/archive',
+    href: PATH_FOREIGN,
   },
   {
     title: '新闻',
-    href: '/about',
+    href: PATH_NEWS,
   },
   {
     title: '预防',
-    href: '/message',
+    href: PATH_PREVENTION,
   },
 ]
 
@@ -49,8 +54,8 @@ const Header = (props: any) => {
 
   const renderNav = () => {
     const spanStyle = {
-      left: `${navIndex * 52 + 10}px`,
-      width: `${navIndex ? (navIndex !== 3 ? 32 : 48) : 0}px`,
+      left: `${navIndex * 85 + 10}px`,
+      width: 64,
     }
     return (
       <ul>
