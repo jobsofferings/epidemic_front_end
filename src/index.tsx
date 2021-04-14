@@ -5,7 +5,13 @@ import reportWebVitals from './reportWebVitals'
 import Router from './router'
 import './reset.less'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 10000000,
+    },
+  },
+})
 
 ReactDOM.render(
   <QueryClientProvider client={queryClient}>

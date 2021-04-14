@@ -5,19 +5,19 @@ import './index.less'
 
 const navList = [
   {
-    title: '首页',
+    title: '国内疫情',
     href: '/',
   },
   {
-    title: '归档',
+    title: '国外疫情',
     href: '/archive',
   },
   {
-    title: '关于',
+    title: '新闻',
     href: '/about',
   },
   {
-    title: '留言区',
+    title: '预防',
     href: '/message',
   },
 ]

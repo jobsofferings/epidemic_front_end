@@ -1,24 +1,10 @@
-import { QueryKey, useQuery, UseQueryOptions } from 'react-query'
-
-const LAZY_QUERY_OPTIONS = {}
+import { useQuery, UseQueryOptions } from 'react-query'
 
 export interface useBaseQueryProps
-  extends Omit<UseQueryOptions<any>, 'service'> {
-  query: QueryKey
-  queryFunction: Function
-}
+  extends Omit<UseQueryOptions<any>, 'service'> {}
 
-function useBaseQuery({
-  query,
-  queryFunction,
-  ...queryOptions
-}: useBaseQueryProps) {
-  const { data, isLoading, ...result } = useQuery(query, {
-    ...LAZY_QUERY_OPTIONS,
-    ...queryOptions,
-    queryFn: ({ queryKey }) => queryFunction(queryKey[0]),
-  })
-
+function useBaseQuery(query: any, ...queryOptions: any[]) {
+  const { data, isLoading, ...result } = useQuery<any>(query, ...queryOptions)
   return { data: data?.data || {}, loading: isLoading, ...result }
 }
 

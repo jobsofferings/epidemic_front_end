@@ -26,3 +26,7 @@ function baseQueryFunction<T = any>(query: string, props: T) {
 export function getChinaDayList<T = GetChinaDayListProps>(props: T) {
   return baseQueryFunction<T>('/getChinaDayList', props)
 }
+
+export function getChinaDayAddList<T = GetChinaDayListProps>(props: T) {
+  return baseQueryFunction<T>('/getChinaDayAddList', props)
+}
