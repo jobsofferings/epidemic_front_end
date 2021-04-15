@@ -4,7 +4,7 @@ import ChinaConfirmChart from '../components/ChinaConfirmChart'
 import ChinaAddConfirmChart from '../components/ChinaAddConfirmChart'
 import './index.less'
 
-const Home = () => {
+const China = () => {
   return (
     <div className="content-area">
       <ChinaConfirmChart />
@@ -13,4 +13,4 @@ const Home = () => {
   )
 }
 
-export default BaseContent(Home)
+export default BaseContent(China)

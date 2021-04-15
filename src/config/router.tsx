@@ -5,8 +5,8 @@ import {
   PATH_NEWS,
   PATH_PREVENTION,
 } from 'src/components/Header'
+import China from 'src/page/China'
 import Foreign from 'src/page/Foreign'
-import Home from 'src/page/Home'
 import News from 'src/page/News'
 import Prevention from 'src/page/Prevention'
 
@@ -20,7 +20,7 @@ export const ROUTE_CONFIG: RouteConfigProps[] = [
   {
     path: PATH_ROOT,
     exact: true,
-    components: <Home />,
+    components: <China />,
   },
   {
     path: PATH_FOREIGN,

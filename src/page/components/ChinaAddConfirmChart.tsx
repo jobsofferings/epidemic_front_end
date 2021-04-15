@@ -3,39 +3,7 @@ import echarts from 'echarts'
 import ReactEchartsCore from 'echarts-for-react/lib/core'
 import useBaseQuery from 'src/components/useBaseQuery'
 import { getChinaDayAddList } from 'src/fetch'
-
-const defaultEchartStyle: React.CSSProperties = {
-  width: 1000,
-  height: 400,
-  background: 'white',
-  padding: 10,
-  boxSizing: 'border-box',
-}
-
-const defaultSeries = (color: string, secondColor = '#ffe') => ({
-  type: 'line',
-  itemStyle: {
-    color,
-  },
-  lineStyle: {
-    color,
-    width: 1,
-  },
-  areaStyle: getAreaStyle(color, secondColor),
-})
-
-const getAreaStyle = (firstColor: string, secondColor: string) => ({
-  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-    {
-      offset: 0,
-      color: firstColor,
-    },
-    {
-      offset: 1,
-      color: secondColor,
-    },
-  ]),
-})
+import { defaultEchartStyle, defaultSeries } from 'src/config/charts'
 
 interface ChinaDayListItemProps {
   confirm: number
