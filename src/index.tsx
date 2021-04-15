@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import reportWebVitals from './reportWebVitals'
 import Router from './router'
 import './reset.less'
+import './index.less'
 
 const queryClient = new QueryClient({
   defaultOptions: {

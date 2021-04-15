@@ -1,22 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import echarts from 'echarts'
 import ReactEchartsCore from 'echarts-for-react/lib/core'
 import useBaseQuery from 'src/components/useBaseQuery'
 import { getCountryConfirm } from 'src/fetch'
 import { defaultEchartStyle } from 'src/config/charts'
 import Spin from 'antd/lib/spin'
+import AllCountryConfirmChartSelect from './AllCountryConfirmChartSelect'
 
 interface GetCountryConfirmProps {
   confirm: number
   name: string
 }
 
-const ChinaConfirmChart = () => {
-  const { data } = useBaseQuery('getCountryConfirm2', getCountryConfirm)
+const AllCountryConfirmChart = () => {
+  const [params, setParams] = useState<OPUtils.Record>({
+    limit: 10,
+  })
+
+  const { data } = useBaseQuery(['todos', params], () =>
+    getCountryConfirm(params),
+  )
 
   return (
     <div className="content-card">
-      <div className="title">全球确诊人数最多国家</div>
+      <div className="title">海外疫情</div>
+      <AllCountryConfirmChartSelect
+        onChange={(country) => setParams({ ...params, country })}
+      />
       <Spin spinning={!Array.isArray(data)}>
         <ReactEchartsCore
           echarts={echarts}
@@ -51,4 +61,4 @@ const options = (list: GetCountryConfirmProps[]) => ({
   ],
 })
 
-export default ChinaConfirmChart
+export default AllCountryConfirmChart
