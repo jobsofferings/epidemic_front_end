@@ -25,8 +25,11 @@ const AllCountryConfirmChartSelect = ({
         countryDataTemp[key] = [name]
       }
     })
-    setCountryData(countryDataTemp || {})
     setContinentData(Object.keys(countryDataTemp) || [])
+    setCountryData(countryDataTemp)
+    setCountries(countryDataTemp[Object.keys(countryDataTemp)[0]] || [])
+    setContinent(Object.keys(countryDataTemp)[0])
+    onSecondCountryChange(countryDataTemp[Object.keys(countryDataTemp)[0]]?.[0])
   }, [data])
 
   const [continentData, setContinentData] = useState<string[]>([])
@@ -34,12 +37,14 @@ const AllCountryConfirmChartSelect = ({
   const [countries, setCountries] = useState(
     countryData[continentData[0]] || [],
   )
+  const [continent, setContinent] = useState(continentData[0] || '')
   const [secondCountry, setSecondCountry] = useState(
     countryData[continentData[0]]?.[0],
   )
 
   const handleContinentChange = (value: any) => {
     setCountries(countryData[value])
+    setContinent(value)
     setSecondCountry(undefined)
   }
 
@@ -48,9 +53,19 @@ const AllCountryConfirmChartSelect = ({
     onChange && onChange(value)
   }
 
+  console.log(continentData)
+  console.log(countryData)
+  console.log(countries)
+  console.log(secondCountry)
+
   return (
     <Row style={{ padding: '0 20px' }} align="middle">
-      <Select showSearch style={selectStyle} onChange={handleContinentChange}>
+      <Select
+        showSearch
+        style={selectStyle}
+        value={continent}
+        onChange={handleContinentChange}
+      >
         {continentData.map((continent) => (
           <Option value={continent} key={continent}>
             {continent}
