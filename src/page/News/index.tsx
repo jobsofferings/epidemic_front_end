@@ -3,7 +3,7 @@ import BaseContent from 'src/components/BaseContent'
 import './index.less'
 
 const News = () => {
-  return <div />
+  return <div className="content-area">新闻</div>
 }
 
 export default BaseContent(News)

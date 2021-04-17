@@ -21,7 +21,7 @@ interface ChinaDayListItemProps {
 
 const ChinaConfirmChart = () => {
   const { data } = useBaseQuery('getChinaDayAddList', getChinaDayAddList)
-  console.log(data)
+
   return (
     <div className="content-card">
       <div className="title">国内新增确诊人数走势图</div>

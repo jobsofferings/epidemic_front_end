@@ -53,11 +53,6 @@ const AllCountryConfirmChartSelect = ({
     onChange && onChange(value)
   }
 
-  console.log(continentData)
-  console.log(countryData)
-  console.log(countries)
-  console.log(secondCountry)
-
   return (
     <Row style={{ padding: '0 20px' }} align="middle">
       <Select

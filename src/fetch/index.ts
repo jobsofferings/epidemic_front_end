@@ -31,6 +31,10 @@ export function getChinaDayAddList<T = GetChinaDayListProps>(props: T) {
   return baseQueryFunction<T>('/getChinaDayAddList', props)
 }
 
+export function getProvinceConfirmList<T = GetChinaDayListProps>(props: T) {
+  return baseQueryFunction<T>('/getProvinceConfirmList', props)
+}
+
 export function getCountryConfirm<T = GetChinaDayListProps>(props: T) {
   return baseQueryFunction<T>('/getCountryConfirm', props)
 }
