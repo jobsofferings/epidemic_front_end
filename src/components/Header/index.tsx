@@ -4,6 +4,7 @@ import { ReactComponent as LOGO } from '../../images/LOGO.svg'
 import './index.less'
 
 export const PATH_ROOT = '/'
+export const PATH_LOGIN = '/login'
 export const PATH_FOREIGN = '/foreign'
 export const PATH_NEWS = '/news'
 export const PATH_PREVENTION = '/prevention'
@@ -67,6 +68,12 @@ const Header = (props: any) => {
     })
   }, [])
 
+  const handleToLogin = () => {
+    setTimeout(() => {
+      props.history.goForward(PATH_LOGIN)
+    }, 300)
+  }
+
   return (
     <div className="header">
       <div className="nav">
@@ -74,6 +81,11 @@ const Header = (props: any) => {
           <LOGO />
         </div>
         <div className="list">{renderNav()}</div>
+        <div className="login">
+          <button onClick={handleToLogin} className="button">
+            登录
+          </button>
+        </div>
       </div>
     </div>
   )

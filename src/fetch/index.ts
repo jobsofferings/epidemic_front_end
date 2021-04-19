@@ -23,6 +23,14 @@ function baseQueryFunction<T = any>(query: string, props: T) {
   })
 }
 
+export function login<T = GetChinaDayListProps>(props: T) {
+  return baseQueryFunction<T>('/login', props)
+}
+
+export function sign<T = GetChinaDayListProps>(props: T) {
+  return baseQueryFunction<T>('/sign', props)
+}
+
 export function getChinaDayList<T = GetChinaDayListProps>(props: T) {
   return baseQueryFunction<T>('/getChinaDayList', props)
 }

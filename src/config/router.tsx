@@ -4,9 +4,11 @@ import {
   PATH_FOREIGN,
   PATH_NEWS,
   PATH_PREVENTION,
+  PATH_LOGIN,
 } from 'src/components/Header'
 import China from 'src/page/China'
 import Foreign from 'src/page/Foreign'
+import Login from 'src/page/LoginAndSign/Login'
 import News from 'src/page/News'
 import Prevention from 'src/page/Prevention'
 
@@ -21,6 +23,11 @@ export const ROUTE_CONFIG: RouteConfigProps[] = [
     path: PATH_ROOT,
     exact: true,
     components: <China />,
+  },
+  {
+    path: PATH_LOGIN,
+    exact: true,
+    components: <Login />,
   },
   {
     path: PATH_FOREIGN,
