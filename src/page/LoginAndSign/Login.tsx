@@ -1,13 +1,88 @@
-import classNames from 'classnames'
 import React, { useState } from 'react'
+import { message } from 'antd'
+import classNames from 'classnames'
+import { useMutation } from 'react-query'
+import { login, sign } from 'src/fetch'
 import './index.less'
+import { withRouter } from 'react-router'
+import { PATH_ROOT } from 'src/components/Header'
 
-const Login = () => {
+interface LoginProps {
+  email: string
+  password: string
+}
+
+interface SignProps {
+  username: string
+  email: string
+  password: string
+}
+
+export interface User {
+  username?: string
+  email?: string
+}
+
+const defaultLogin: LoginProps = {
+  email: '',
+  password: '',
+}
+
+const defaultSign: SignProps = {
+  email: '',
+  password: '',
+  username: '',
+}
+
+const Login = (props: any) => {
   const [isShowLogin, setIsShowLogin] = useState(false)
   const [isShowSign, setIsShowSign] = useState(true)
 
-  const [loginParams, setLoginParams] = useState({})
-  const [signParams, setSignParams] = useState({})
+  const [loginParams, setLoginParams] = useState<LoginProps>(defaultLogin)
+  const [signParams, setSignParams] = useState<SignProps>(defaultSign)
+
+  const { mutate: loginFetch } = useMutation<any>(
+    ['login', loginParams],
+    () => login(loginParams),
+    {
+      onSuccess: ({ data }) => {
+        const { flag, user, msg } = data
+        if (!flag) {
+          message.error(msg)
+          setLoginParams(defaultLogin)
+        } else {
+          message.success(`用户：${user.username} 登录成功`)
+          afterSuccess(user)
+        }
+      },
+    },
+  )
+
+  const { mutate: signFetch } = useMutation<any>(
+    ['sign', signParams],
+    () => sign(signParams),
+    {
+      onSuccess: ({ data }) => {
+        const { flag, user, msg } = data
+        if (!flag) {
+          message.error(msg)
+          setSignParams(defaultSign)
+        } else {
+          message.success(`用户：${user.username} 注册成功`)
+          afterSuccess(user)
+        }
+      },
+    },
+  )
+
+  const afterSuccess = (user: User) => {
+    saveStorage(user)
+    props.history.push(PATH_ROOT)
+  }
+
+  const saveStorage = (user: User) => {
+    sessionStorage.setItem('user', JSON.stringify(user))
+  }
 
   const handleSlideSign = () => {
     setIsShowSign(!isShowSign)
@@ -20,10 +95,11 @@ const Login = () => {
   }
 
   const handleLogin = () => {
-    console.log(loginParams)
+    loginFetch()
   }
+
   const handleSign = () => {
-    console.log(signParams)
+    signFetch()
   }
 
   const handleChangeSignParams: React.ChangeEventHandler<HTMLInputElement> = ({
@@ -58,6 +134,7 @@ const Login = () => {
               name="username"
               className="input"
               placeholder="用户名"
+              value={signParams.username}
               onChange={handleChangeSignParams}
             />
             <input
@@ -65,6 +142,7 @@ const Login = () => {
               name="email"
               className="input"
               placeholder="邮箱"
+              value={signParams.email}
               onChange={handleChangeSignParams}
             />
             <input
@@ -72,6 +150,7 @@ const Login = () => {
               name="password"
               className="input"
               placeholder="密码"
+              value={signParams.password}
               onChange={handleChangeSignParams}
             />
           </div>
@@ -90,12 +169,14 @@ const Login = () => {
                 type="email"
                 name="email"
                 placeholder="邮箱"
+                value={loginParams.email}
                 onChange={handleChangeLoginParams}
               />
               <input
                 type="password"
                 name="password"
                 placeholder="密码"
+                value={loginParams.password}
                 onChange={handleChangeLoginParams}
               />
             </div>
@@ -109,4 +190,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default withRouter(Login)

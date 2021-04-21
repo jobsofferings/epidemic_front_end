@@ -70,3 +70,11 @@ export const getPersistData = (key: string, needParse = false) => {
     return null
   }
 }
+
+export const safeParse = (str: string) => {
+  try {
+    return JSON.parse(str)
+  } catch (error) {
+    return {}
+  }
+}

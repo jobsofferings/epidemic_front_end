@@ -1,5 +1,8 @@
-import React, { useState } from 'react'
+import { message, Row } from 'antd'
+import React, { useEffect, useState } from 'react'
 import { Link, withRouter } from 'react-router-dom'
+import { safeParse } from 'src/config/utils'
+import { User } from 'src/page/LoginAndSign/Login'
 import { ReactComponent as LOGO } from '../../images/LOGO.svg'
 import './index.less'
 
@@ -30,8 +33,13 @@ const navList = [
 
 const Header = (props: any) => {
   const [navIndex, setNavIndex] = useState(0)
+  const [user, setUser] = useState<User>({})
 
   const pathname = props.history.location.pathname
+
+  useEffect(() => {
+    setUser(safeParse(sessionStorage['user']))
+  }, [])
 
   const handleChangerouter = (navIndex: number) => setNavIndex(navIndex)
 
@@ -70,7 +78,15 @@ const Header = (props: any) => {
 
   const handleToLogin = () => {
     setTimeout(() => {
-      props.history.goForward(PATH_LOGIN)
+      props.history.push(PATH_LOGIN)
+    }, 300)
+  }
+
+  const handleToLogout = () => {
+    message.success(`用户：${user.username} 注销成功`)
+    setTimeout(() => {
+      sessionStorage.removeItem('user')
+      setUser({})
     }, 300)
   }
 
@@ -81,11 +97,21 @@ const Header = (props: any) => {
           <LOGO />
         </div>
         <div className="list">{renderNav()}</div>
-        <div className="login">
-          <button onClick={handleToLogin} className="button">
-            登录
-          </button>
-        </div>
+        {!user.username && (
+          <div className="login">
+            <button onClick={handleToLogin} className="button">
+              登录
+            </button>
+          </div>
+        )}
+        {user.username && (
+          <Row className="login" align="middle">
+            <div style={{ marginRight: '30px' }}>欢迎你，{user.username}</div>
+            <button onClick={handleToLogout} className="button">
+              注销
+            </button>
+          </Row>
+        )}
       </div>
     </div>
   )
