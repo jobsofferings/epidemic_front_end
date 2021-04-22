@@ -38,7 +38,6 @@ const defaultList = [
 
 const Header = (props: any) => {
   const [list, setList] = useState<{ title: string; href: string }[]>([])
-  const [navIndex, setNavIndex] = useState(0)
   const [user, setUser] = useState<User>({})
 
   const pathname = props.history.location.pathname
@@ -47,21 +46,17 @@ const Header = (props: any) => {
     setUser(safeParse(sessionStorage['user']))
   }, [])
 
-  React.useEffect(() => {
-    list.map((item, index) => {
-      if (item.href === pathname) {
-        setNavIndex(index)
-      }
-    })
-  }, [])
-
   useEffect(() => {
     setList(Object.keys(user).length ? defaultList : defaultList.slice(0, 4))
   }, [user])
 
-  const handleChangerouter = (navIndex: number) => setNavIndex(navIndex)
-
   const renderNav = () => {
+    let navIndex = 0
+    list.map((item, index) => {
+      if (item.href === pathname) {
+        navIndex = index
+      }
+    })
     const spanStyle = {
       left: `${navIndex * 85 + 10}px`,
       width: 64,
@@ -70,11 +65,7 @@ const Header = (props: any) => {
       <ul>
         {list.map((item, index) => (
           <Link to={item.href} key={index}>
-            <li
-              onClick={() => {
-                handleChangerouter(index)
-              }}
-            >
+            <li>
               <span className={navIndex === index ? 'nav-active' : ''}>
                 {item.title}
               </span>
@@ -97,6 +88,7 @@ const Header = (props: any) => {
     setTimeout(() => {
       sessionStorage.removeItem('user')
       setUser({})
+      props.history.push(PATH_ROOT)
     }, 300)
   }
 

@@ -1,144 +1,61 @@
-import React from 'react'
-import { Tooltip, message } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { message as MessageAntd, Tooltip } from 'antd'
 import { ReactComponent as LIKE } from 'src/images/LIKE.svg'
+import useBaseQuery from 'src/components/useBaseQuery'
+import { getMessages, messageLike } from 'src/fetch'
+import { dateFormat, safeParse } from 'src/config/utils'
+import { useMutation } from 'react-query'
+import { User } from 'src/page/LoginAndSign/Login'
 import './index.less'
 
-const messageList = [
-  {
-    username: '三毛',
-    imgSrc: 'http://www.jobsofferings.cn:4397/头像1.jpg',
-    messageContent: '你好呀你好呀', // 注意，这里允许输入100字，但是在后端那边需要再次判断
-    timer: 10000000,
-    timeFormated: '2020-03-17 14:47',
-    like: 3,
-    active: true,
-  },
-  {
-    username: '三毛',
-    imgSrc: 'http://www.jobsofferings.cn:4397/头像1.jpg',
-    messageContent:
-      '你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀', // 注意，这里允许输入100字，但是在后端那边需要再次判断
-    timer: 10000000,
-    timeFormated: '2020-03-17 14:47',
-    like: 3,
-    active: true,
-  },
-  {
-    username: '三毛',
-    imgSrc: 'http://www.jobsofferings.cn:4397/头像1.jpg',
-    messageContent:
-      '你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀', // 注意，这里允许输入100字，但是在后端那边需要再次判断
-    timer: 10000000,
-    timeFormated: '2020-03-17 14:47',
-    like: 3,
-    active: true,
-  },
-  {
-    username: '三毛',
-    imgSrc: 'http://www.jobsofferings.cn:4397/头像1.jpg',
-    messageContent: '你好呀你好呀', // 注意，这里允许输入100字，但是在后端那边需要再次判断
-    timer: 10000000,
-    timeFormated: '2020-03-17 14:47',
-    like: 3,
-    active: true,
-  },
-  {
-    username: '三毛',
-    imgSrc: 'http://www.jobsofferings.cn:4397/头像1.jpg',
-    messageContent:
-      '你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀', // 注意，这里允许输入100字，但是在后端那边需要再次判断
-    timer: 10000000,
-    timeFormated: '2020-03-17 14:47',
-    like: 3,
-    active: true,
-  },
-  {
-    username: '三毛',
-    imgSrc: 'http://www.jobsofferings.cn:4397/头像1.jpg',
-    messageContent:
-      '你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀', // 注意，这里允许输入100字，但是在后端那边需要再次判断
-    timer: 10000000,
-    timeFormated: '2020-03-17 14:47',
-    like: 3,
-    active: true,
-  },
-  {
-    username: '三毛',
-    imgSrc: 'http://www.jobsofferings.cn:4397/头像1.jpg',
-    messageContent: '你好呀你好呀', // 注意，这里允许输入100字，但是在后端那边需要再次判断
-    timer: 10000000,
-    timeFormated: '2020-03-17 14:47',
-    like: 3,
-    active: true,
-  },
-  {
-    username: '三毛',
-    imgSrc: 'http://www.jobsofferings.cn:4397/头像1.jpg',
-    messageContent:
-      '你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀', // 注意，这里允许输入100字，但是在后端那边需要再次判断
-    timer: 10000000,
-    timeFormated: '2020-03-17 14:47',
-    like: 3,
-    active: true,
-  },
-  {
-    username: '三毛',
-    imgSrc: 'http://www.jobsofferings.cn:4397/头像1.jpg',
-    messageContent:
-      '你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀', // 注意，这里允许输入100字，但是在后端那边需要再次判断
-    timer: 10000000,
-    timeFormated: '2020-03-17 14:47',
-    like: 3,
-    active: true,
-  },
-  {
-    username: '三毛',
-    imgSrc: 'http://www.jobsofferings.cn:4397/头像1.jpg',
-    messageContent: '你好呀你好呀', // 注意，这里允许输入100字，但是在后端那边需要再次判断
-    timer: 10000000,
-    timeFormated: '2020-03-17 14:47',
-    like: 3,
-    active: true,
-  },
-  {
-    username: '三毛',
-    imgSrc: 'http://www.jobsofferings.cn:4397/头像1.jpg',
-    messageContent:
-      '你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀', // 注意，这里允许输入100字，但是在后端那边需要再次判断
-    timer: 10000000,
-    timeFormated: '2020-03-17 14:47',
-    like: 3,
-    active: true,
-  },
-  {
-    username: '三毛',
-    imgSrc: 'http://www.jobsofferings.cn:4397/头像1.jpg',
-    messageContent:
-      '你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀你好呀', // 注意，这里允许输入100字，但是在后端那边需要再次判断
-    timer: 10000000,
-    timeFormated: '2020-03-17 14:47',
-    like: 3,
-    active: true,
-  },
-]
+const MesContent = () => {
+  const [user, setUser] = useState<User>({})
+  const [reqId, setReqId] = useState<string>()
 
-function MesContent() {
-  const handleLike = () => {
-    message.info('当前功能未开发')
+  useEffect(() => {
+    if (
+      sessionStorage['user'] !== JSON.stringify(user) &&
+      sessionStorage['user']
+    ) {
+      setUser(safeParse(sessionStorage['user']))
+    }
+  })
+
+  let { data, refetch } = useBaseQuery(['getMessages', user], () =>
+    getMessages(user),
+  )
+
+  const { mutate: changeLike } = useMutation<any>(
+    ['messageLike', { ...user, _id: reqId }],
+    () => messageLike({ ...user, _id: reqId }),
+    {
+      onSuccess: ({ data }) => {
+        const { flag, message } = data
+        if (flag) {
+          MessageAntd.success(message)
+          refetch()
+        } else {
+          MessageAntd.error(message)
+        }
+      },
+    },
+  )
+
+  const handleLike = (_id: string) => {
+    setReqId(_id)
+    setTimeout(() => {
+      user.email && changeLike()
+    }, 0)
   }
 
   return (
     <div className="archive-content-area">
       <div className="archive-content">
         <div className="masonry">
-          {messageList.map((item, index) => {
+          {(Array.isArray(data) ? data : []).map((item, index) => {
             return (
               <li key={index} className="archive-item item">
-                {/* 注意，这里允许点击跳转友链 */}
                 <div className="archive-item-header">
-                  <div>
-                    <img src={item.imgSrc} alt="" />
-                  </div>
                   <Tooltip title="去TA的主页看看">
                     <p>{item.username}</p>
                   </Tooltip>
@@ -147,15 +64,22 @@ function MesContent() {
                   <p>{item.messageContent}</p>
                 </div>
                 <div className="archive-item-footer">
-                  <div className="archive-item-footer-left">
-                    <LIKE
-                      className={item.active ? 'like-active' : ''}
-                      onClick={handleLike}
-                    />
-                    <p>{item.like}</p>
-                  </div>
+                  {user.email && (
+                    <div className="archive-item-footer-left">
+                      <LIKE
+                        className={item.isActive ? 'like-active' : ''}
+                        onClick={() => handleLike(item._id)}
+                      />
+                      <p>{item.num}</p>
+                    </div>
+                  )}
                   <div className="archive-item-footer-right">
-                    <p>{item.timeFormated}</p>
+                    <p>
+                      {dateFormat(
+                        new Date(parseInt(item.time)),
+                        'yyyy/MM/dd HH:mm:ss',
+                      )}
+                    </p>
                   </div>
                 </div>
               </li>
