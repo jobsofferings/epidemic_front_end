@@ -11,8 +11,9 @@ export const PATH_LOGIN = '/login'
 export const PATH_FOREIGN = '/foreign'
 export const PATH_NEWS = '/news'
 export const PATH_PREVENTION = '/prevention'
+export const PATH_MESSAGE = '/message'
 
-const navList = [
+const defaultList = [
   {
     title: '国内疫情',
     href: PATH_ROOT,
@@ -29,9 +30,14 @@ const navList = [
     title: '预防',
     href: PATH_PREVENTION,
   },
+  {
+    title: '留言',
+    href: PATH_MESSAGE,
+  },
 ]
 
 const Header = (props: any) => {
+  const [list, setList] = useState<{ title: string; href: string }[]>([])
   const [navIndex, setNavIndex] = useState(0)
   const [user, setUser] = useState<User>({})
 
@@ -40,6 +46,18 @@ const Header = (props: any) => {
   useEffect(() => {
     setUser(safeParse(sessionStorage['user']))
   }, [])
+
+  React.useEffect(() => {
+    list.map((item, index) => {
+      if (item.href === pathname) {
+        setNavIndex(index)
+      }
+    })
+  }, [])
+
+  useEffect(() => {
+    setList(Object.keys(user).length ? defaultList : defaultList.slice(0, 4))
+  }, [user])
 
   const handleChangerouter = (navIndex: number) => setNavIndex(navIndex)
 
@@ -50,7 +68,7 @@ const Header = (props: any) => {
     }
     return (
       <ul>
-        {navList.map((item, index) => (
+        {list.map((item, index) => (
           <Link to={item.href} key={index}>
             <li
               onClick={() => {
@@ -67,14 +85,6 @@ const Header = (props: any) => {
       </ul>
     )
   }
-
-  React.useEffect(() => {
-    navList.map((item, index) => {
-      if (item.href === pathname) {
-        setNavIndex(index)
-      }
-    })
-  }, [])
 
   const handleToLogin = () => {
     setTimeout(() => {
