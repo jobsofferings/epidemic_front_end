@@ -23,34 +23,49 @@ function baseQueryFunction<T = any>(query: string, props: T) {
   })
 }
 
-export function login<T = GetChinaDayListProps>(props: T) {
-  return baseQueryFunction<T>('/login', props)
+const apiList: string[] = [
+  'login',
+  'sign',
+  'getMessages',
+  'getChinaDayList',
+  'getChinaDayAddList',
+  'getProvinceConfirmList',
+  'getCountryConfirm',
+  'getInfoByCountry',
+  'countryAnddContinent',
+]
+
+const createQueryFunctionMap: (
+  list: string[],
+) => OPUtils.Record<string, Function> = (list: string[]) => {
+  const funcMap: OPUtils.Record = {}
+  list.forEach((api) => {
+    funcMap[api] = (props: OPUtils.Record) =>
+      baseQueryFunction<OPUtils.Record>(`/${api}`, props)
+  })
+  return funcMap
 }
 
-export function sign<T = GetChinaDayListProps>(props: T) {
-  return baseQueryFunction<T>('/sign', props)
-}
+const {
+  login,
+  sign,
+  getMessages,
+  getChinaDayList,
+  getChinaDayAddList,
+  getProvinceConfirmList,
+  getCountryConfirm,
+  getInfoByCountry,
+  countryAnddContinent,
+} = createQueryFunctionMap(apiList)
 
-export function getChinaDayList<T = GetChinaDayListProps>(props: T) {
-  return baseQueryFunction<T>('/getChinaDayList', props)
-}
-
-export function getChinaDayAddList<T = GetChinaDayListProps>(props: T) {
-  return baseQueryFunction<T>('/getChinaDayAddList', props)
-}
-
-export function getProvinceConfirmList<T = GetChinaDayListProps>(props: T) {
-  return baseQueryFunction<T>('/getProvinceConfirmList', props)
-}
-
-export function getCountryConfirm<T = GetChinaDayListProps>(props: T) {
-  return baseQueryFunction<T>('/getCountryConfirm', props)
-}
-
-export function getInfoByCountry<T = GetChinaDayListProps>(props: T) {
-  return baseQueryFunction<T>('/getInfoByCountry', props)
-}
-
-export function countryAnddContinent<T = GetChinaDayListProps>(props: T) {
-  return baseQueryFunction<T>('/countryAnddContinent', props)
+export {
+  login,
+  sign,
+  getMessages,
+  getChinaDayList,
+  getChinaDayAddList,
+  getProvinceConfirmList,
+  getCountryConfirm,
+  getInfoByCountry,
+  countryAnddContinent,
 }
