@@ -21,6 +21,12 @@ interface SignProps {
 export interface User {
   username?: string
   email?: string
+  authority?: string
+}
+
+export const Authority = {
+  ADMIN: 'admin',
+  PRIMARY: 'primary',
 }
 
 const defaultLogin: LoginProps = {

@@ -1,7 +1,6 @@
-import zhCN from 'antd/es/locale/zh_CN';
+import zhCN from 'antd/es/locale/zh_CN'
 
-const antdConfig =  {
-  locale: zhCN
-};
-
-export default antdConfig;
+export default {
+  autoInsertSpaceInButton: false,
+  locale: zhCN,
+}

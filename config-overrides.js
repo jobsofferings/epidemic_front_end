@@ -20,6 +20,7 @@ module.exports = {
     addLessLoader({
       javascriptEnabled: true,
       modifyVars: {
+        '@primary-color': '#fb7268',
         '@primary-menu-color': '#7638ff',
         '@primary-menu-background-color': 'rgba(118, 56, 255, 0.05)',
         '@darker-color': 'rgba(0,0,0,0.85)',

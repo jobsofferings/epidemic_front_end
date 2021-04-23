@@ -1,6 +1,7 @@
 import { TablePaginationConfig } from 'antd/lib/table'
 import { PaginationProps } from 'antd/lib/pagination'
 import { PAGE_LIMIT } from './constants'
+import { message as MessageAntd } from 'antd'
 
 export const PAGINATION: Partial<PaginationProps> = {
   pageSize: PAGE_LIMIT,
@@ -76,5 +77,18 @@ export const safeParse = (str: string) => {
     return JSON.parse(str)
   } catch (error) {
     return {}
+  }
+}
+
+interface DefaultMessageProps {
+  flag: boolean
+  message: string
+}
+
+export const defaultSendMessage = ({ flag, message }: DefaultMessageProps) => {
+  if (flag) {
+    MessageAntd.success(message)
+  } else {
+    MessageAntd.error(message)
   }
 }
