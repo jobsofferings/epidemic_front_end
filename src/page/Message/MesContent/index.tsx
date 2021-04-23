@@ -57,6 +57,8 @@ const MesContent = ({ user, messages, refetch, loading }: MesContentProps) => {
     setReqId(_id)
     Modal.confirm({
       title: '是否删除该留言?',
+      okText: '确定',
+      cancelText: '取消',
       onOk: () => {
         user.email && user.authority === Authority.ADMIN && fetchDelete()
       },
@@ -80,16 +82,14 @@ const MesContent = ({ user, messages, refetch, loading }: MesContentProps) => {
                     <p>{item.messageContent}</p>
                   </div>
                   <div className="archive-item-footer">
-                    {user.email && user.authority === Authority.ADMIN && (
-                      <div className="archive-item-footer-left">
-                        <DELETE
-                          className={item.isActive ? 'like-active' : ''}
-                          onClick={() => handleDelete(item._id)}
-                        />
-                      </div>
-                    )}
                     {user.email && (
                       <div className="archive-item-footer-left">
+                        {user.authority === Authority.ADMIN && (
+                          <DELETE
+                            className={item.isActive ? 'like-active' : ''}
+                            onClick={() => handleDelete(item._id)}
+                          />
+                        )}
                         <LIKE
                           className={item.isActive ? 'like-active' : ''}
                           onClick={() => handleLike(item._id)}

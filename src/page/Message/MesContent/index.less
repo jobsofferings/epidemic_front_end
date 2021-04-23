@@ -7,7 +7,7 @@
 @archiveItemHeaderHeight: 50px;
 @archiveItemContentInterval: 10px;
 @archiveItemFooterHeight: 40px;
-@likeActiveColor: #ed1941;
+@likeActiveColor: #fb7268;
 @interval: 20px;
 .archive-content-area {
   .archive-content {
@@ -80,11 +80,18 @@
           svg {
             float: left;
             height: (@archiveItemFooterHeight / 2);
-            margin: (@archiveItemFooterHeight / 4);
+            margin: @archiveItemFooterHeight / 4 @archiveItemFooterHeight / 8;
             margin-left: 0;
             fill: #909090;
             transition: all 0.2s ease;
             cursor: pointer;
+            &:nth-child(1) {
+              fill: #909090;
+              margin-right: @archiveItemFooterHeight / 3;
+              &:hover {
+                fill: #555;
+              }
+            }
           }
           p {
             float: left;
