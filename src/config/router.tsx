@@ -3,16 +3,16 @@ import {
   PATH_ROOT,
   PATH_FOREIGN,
   PATH_NEWS,
-  PATH_PREVENTION,
   PATH_LOGIN,
   PATH_MESSAGE,
+  PATH_NEWS_DETAIL,
 } from 'src/components/Header'
+import ArticleDetail from 'src/page/ArticleDetail'
 import China from 'src/page/China'
 import Foreign from 'src/page/Foreign'
 import Login from 'src/page/LoginAndSign/Login'
 import Message from 'src/page/Message'
 import News from 'src/page/News'
-import Prevention from 'src/page/Prevention'
 
 export interface RouteConfigProps {
   path: string
@@ -42,9 +42,14 @@ export const ROUTE_CONFIG: RouteConfigProps[] = [
     components: <News />,
   },
   {
-    path: PATH_PREVENTION,
+    path: PATH_NEWS,
     exact: true,
-    components: <Prevention />,
+    components: <News />,
+  },
+  {
+    path: PATH_NEWS_DETAIL,
+    exact: true,
+    components: <ArticleDetail />,
   },
   {
     path: PATH_MESSAGE,

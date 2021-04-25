@@ -26,6 +26,8 @@ function baseQueryFunction<T = any>(query: string, props: T) {
 const apiList: string[] = [
   'login',
   'sign',
+  'article',
+  'articleDetail',
   'getMessages',
   'addMessage',
   'messageLike',
@@ -52,6 +54,8 @@ const createQueryFunctionMap: (
 const {
   login,
   sign,
+  article,
+  articleDetail,
   getMessages,
   addMessage,
   messageLike,
@@ -67,6 +71,8 @@ const {
 export {
   login,
   sign,
+  article,
+  articleDetail,
   getMessages,
   addMessage,
   messageLike,

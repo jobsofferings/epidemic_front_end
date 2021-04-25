@@ -1,0 +1,78 @@
+@allBackgroundColor: white;
+@carouselHeight: 300px;
+@menuWidth: 330px;
+@menuTitleHeight: 40px;
+@Offset: 30%;
+@interval: 20px;
+@articleHeight: 20px;
+.menu {
+  float: left;
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  min-height: @carouselHeight;
+  padding: 15px;
+  border-radius: 3px;
+  background-color: @allBackgroundColor;
+  margin-bottom: @interval;
+  .menu-header {
+    box-sizing: border-box;
+    height: @menuTitleHeight;
+    border-bottom: 1px solid #ddd;
+    svg {
+      float: left;
+      width: 20px;
+      height: 20px;
+      margin-left: 2px;
+      margin-top: 10px;
+      fill: #bdbdbd;
+    }
+    .menu-title {
+      float: left;
+      margin-left: 10px;
+      height: @menuTitleHeight;
+      line-height: @menuTitleHeight;
+    }
+  }
+  .menu-content {
+    margin-top: 10px;
+    .menu-article {
+      display: flex;
+      height: @menuTitleHeight;
+      padding: ((@menuTitleHeight - @articleHeight) / 2) 0;
+      div {
+        float: left;
+        width: 20px;
+        height: 20px;
+        font-size: 14px;
+        line-height: @articleHeight;
+        border-radius: 4px;
+        background-color: #e6e6e6;
+        text-align: center;
+        cursor: default;
+      }
+      p {
+        float: left;
+        flex: 1;
+        line-height: @articleHeight;
+        font-size: 14px;
+        margin-left: 10px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        transition: all 0.4s ease;
+        cursor: pointer;
+      }
+      p:hover {
+        text-decoration: underline;
+        margin-left: 15px;
+      }
+    }
+  }
+}
+
+.content-area-right-fixed {
+  width: @menuWidth;
+  position: fixed;
+}

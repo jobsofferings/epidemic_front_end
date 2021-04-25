@@ -1,0 +1,36 @@
+@allBackgroundColor: white;
+@navHeight: 60px;
+@interval: 20px;
+
+.article-detail-content {
+  float: left;
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  min-height: calc(~'100vh' - (3 * @navHeight));
+  padding: 15px;
+  border-radius: 3px;
+  background-color: @allBackgroundColor;
+  margin-bottom: @interval;
+  .ant-spin-container > .author {
+    padding: 10px 45px;
+    .name {
+      font-size: 16px;
+      font-weight: bold;
+      height: 24px;
+    }
+    .time,
+    .read {
+      letter-spacing: 1px;
+      color: #909090;
+      font-size: 14px;
+      margin-right: 10px;
+    }
+  }
+  .ant-spin-container > h1 {
+    font-size: 28px;
+    font-weight: bold;
+    padding: 20px 45px;
+  }
+}

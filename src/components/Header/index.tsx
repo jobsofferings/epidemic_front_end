@@ -10,7 +10,8 @@ export const PATH_ROOT = '/'
 export const PATH_LOGIN = '/login'
 export const PATH_FOREIGN = '/foreign'
 export const PATH_NEWS = '/news'
-export const PATH_PREVENTION = '/prevention'
+export const PATH_NEWS_DETAIL_BASE = '/news'
+export const PATH_NEWS_DETAIL = `${PATH_NEWS_DETAIL_BASE}/:id`
 export const PATH_MESSAGE = '/message'
 
 const defaultList = [
@@ -25,10 +26,6 @@ const defaultList = [
   {
     title: '新闻',
     href: PATH_NEWS,
-  },
-  {
-    title: '预防',
-    href: PATH_PREVENTION,
   },
   {
     title: '留言',
@@ -57,6 +54,12 @@ const Header = (props: any) => {
         navIndex = index
       }
     })
+    if (
+      pathname.split('/').length > 2 &&
+      pathname.split('/').slice(0, 2).join('/') === PATH_NEWS_DETAIL_BASE
+    ) {
+      navIndex = 2
+    }
     const spanStyle = {
       left: `${navIndex * 85 + 10}px`,
       width: 64,
