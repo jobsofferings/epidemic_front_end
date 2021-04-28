@@ -60,7 +60,6 @@ const NewsContent = ({ data, getMore, total = 0, ...props }: any) => {
             </div>
             <div>{item.author}</div>
             <div>{item.read} 次阅读</div>
-            <div>{item.like} 人喜欢</div>
           </div>
           <div className="articles-meta-right">
             <div>

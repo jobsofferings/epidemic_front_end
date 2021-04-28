@@ -51,6 +51,7 @@ export const abstractFn = (res: string) => {
       .replace(/\n/g, '') //全局匹配换行
       .replace(/\s/g, '') //全局匹配空字符;
       .replace(/&emsp;/g, '')
+      .replace(/&nbsp;/g, '')
     return str.slice(0, 155)
   }
 }
