@@ -1,13 +1,13 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://www.jobsofferings.cn:5000'
+axios.defaults.baseURL = 'http://www.jobsofferings.cn:4398'
 
 const env = process.env.NODE_ENV
 
 if (env === 'development') {
-  axios.defaults.baseURL = 'http://localhost:5000'
+  axios.defaults.baseURL = 'http://localhost:4398'
 } else if (env === 'production') {
-  axios.defaults.baseURL = 'http://www.jobsofferings.cn:5000'
+  axios.defaults.baseURL = 'http://www.jobsofferings.cn:4398'
 }
 
 export const axiosGet = (url: string, data: any) => {
